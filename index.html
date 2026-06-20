@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CulinaryCut — ECCV 2026</title>
+  <meta name="description" content="CulinaryCut: A Physics-Aware Benchmark for Robotic Food Cutting in Deformable Simulation. ECCV 2026.">
+  <meta property="og:title" content="CulinaryCut">
+  <meta property="og:description" content="A Physics-Aware Benchmark for Robotic Food Cutting in Deformable Simulation">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Token system ─── */
+    :root {
+      --ground:    #FFFFFF;
+      --text:      #1A1A2E;
+      --accent:    #D63031;
+      --accent-2:  #2D3561;
+      --muted:     #6B7280;
+      --surface:   #F8F9FB;
+      --border:    #E5E7EB;
+      --dark:      #0E1117;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--ground);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    a { color: inherit; }
+
+    /* ─── Shared section rhythm ─── */
+    .cc-section {
+      padding: 5rem 1.5rem;
+    }
+
+    .cc-section--dark {
+      background: var(--dark);
+      padding: 3.5rem 1.5rem;
+    }
+
+    .cc-section--surface {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── Section headings ─── */
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .rule {
+      width: 40px;
+      height: 3px;
+      background: var(--accent);
+      margin: 0 auto 1.25rem;
+    }
+
+    .sec-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .sec-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.65;
+    }
+
+    /* ─── HERO ─── */
+    .hero-wrap {
+      padding: 4.5rem 1.5rem 3.5rem;
+      text-align: center;
+    }
+
+    .venue-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.35rem 1.1rem;
+      border-radius: 2px;
+      margin-bottom: 1.75rem;
+    }
+
+    .paper-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 0 0 0.6rem;
+    }
+
+    .paper-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: -0.01em;
+      line-height: 1.5;
+      max-width: 700px;
+      margin: 0 auto 2.25rem;
+    }
+
+    /* ─── Authors ─── */
+    .author-row {
+      font-size: 0.975rem;
+      line-height: 2;
+      margin-bottom: 0.4rem;
+    }
+
+    .author-row a {
+      color: var(--accent-2);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .author-row a:hover { text-decoration: underline; }
+
+    sup.eq {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.8em;
+    }
+
+    .affil-row {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .affil-row .eq-note {
+      display: inline-block;
+      margin-top: 0.25rem;
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+
+    /* ─── Link buttons ─── */
+    .pub-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      justify-content: center;
+      margin-top: 2.25rem;
+    }
+
+    .pub-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1.3rem;
+      border-radius: 3px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
+      border: 2px solid var(--text);
+      color: var(--text);
+      background: transparent;
+      white-space: nowrap;
+    }
+
+    .pub-btn:hover {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .pub-btn--primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .pub-btn--primary:hover {
+      background: #b52626;
+      border-color: #b52626;
+      color: #fff;
+    }
+
+    /* ─── TEASER ─── */
+    .teaser-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .demo-frame {
+      max-width: 920px;
+      margin: 0 auto;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .demo-frame img,
+    .demo-frame video {
+      width: 100%;
+      display: block;
+    }
+
+    .teaser-cap {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 0.83rem;
+      margin-top: 1.5rem;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.65;
+    }
+
+    /* ─── ABSTRACT ─── */
+    .abstract-body {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: #374151;
+      line-height: 1.9;
+      text-align: justify;
+    }
+
+    /* ─── STATS ─── */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem 4.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .stat {
+      text-align: center;
+      min-width: 90px;
+    }
+
+    .stat-num {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(2.4rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-lbl {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      line-height: 1.4;
+    }
+
+    /* ─── FOOD CHIPS ─── */
+    .chip-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--ground);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-easy { background: #10B981; }
+    .dot-med  { background: #F59E0B; }
+    .dot-hard { background: #EF4444; }
+
+    .tier-key {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.75rem;
+      margin-top: 1.25rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .tier-key span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* ─── TASK CARDS ─── */
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.25rem;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .task-card {
+      background: var(--ground);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: 0 0 6px 6px;
+      padding: 1.75rem;
+    }
+
+    .task-tag {
+      display: inline-block;
+      background: rgba(214, 48, 49, 0.09);
+      color: var(--accent);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
+    }
+
+    .task-card h3 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.975rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .task-card p {
+      font-size: 0.875rem;
+      color: #4B5563;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* ─── PIPELINE ─── */
+    .pipeline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .pipe-step {
+      text-align: center;
+      padding: 1.25rem 1.5rem;
+      background: var(--ground);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      min-width: 130px;
+      flex: 1;
+    }
+
+    .pipe-step .icon-wrap {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+
+    .pipe-step h4 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .pipe-step p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .pipe-arrow {
+      color: var(--accent);
+      font-size: 1.2rem;
+      padding: 0 0.25rem;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .pipe-arrow { display: none; }
+      .pipe-step { min-width: 100%; }
+    }
+
+    /* ─── RESULTS TABLE ─── */
+    .table-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+
+    .cc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .cc-table thead tr {
+      border-bottom: 2px solid var(--text);
+    }
+
+    .cc-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.75rem 1rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .cc-table th:first-child { text-align: left; }
+
+    .cc-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      color: #374151;
+    }
+
+    .cc-table td:first-child {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .cc-table tbody tr:last-child td { border-bottom: none; }
+
+    .cc-table .best {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ─── BIBTEX ─── */
+    .bib-box {
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--dark);
+      border-radius: 6px;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .bib-box pre {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.83rem;
+      line-height: 1.8;
+      color: #CBD5E1;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin: 0;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.5);
+      padding: 0.25rem 0.65rem;
+      border-radius: 3px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    /* ─── FOOTER ─── */
+    .cc-footer {
+      background: var(--text);
+      color: rgba(255, 255, 255, 0.45);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.82rem;
+      line-height: 1.8;
+    }
+
+    .cc-footer a {
+      color: rgba(255, 255, 255, 0.65);
+      text-decoration: none;
+    }
+
+    .cc-footer a:hover { color: #fff; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 560px) {
+      .hero-wrap { padding: 3rem 1rem 2.5rem; }
+      .paper-title { letter-spacing: -0.02em; }
+      .stats-row { gap: 1.5rem 2.5rem; }
+      .stat-num { font-size: 2.2rem; }
+      .cc-section { padding: 3.5rem 1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section>
+  <div class="hero-wrap">
+    <span class="venue-badge">ECCV 2026</span>
+
+    <h1 class="paper-title">CulinaryCut</h1>
+    <p class="paper-sub">
+      A Physics-Aware Benchmark for Robotic Food Cutting<br>in Deformable Simulation
+    </p>
+
+    <!-- Authors -->
+    <div style="margin-bottom: 0.5rem;">
+      <div class="author-row">
+        <a href="#">Hyunseo Koh</a><sup class="eq">†,1,3</sup>&ensp;
+        <a href="#">Chang-Yong Song</a><sup class="eq">†,2</sup>&ensp;
+        <a href="#">Youngjae Choi</a><sup class="eq">†,1</sup>&ensp;
+        <a href="#">Misa Viveiros</a><sup>2</sup>&ensp;
+        <a href="#">David Hyde</a><sup>2</sup>&ensp;
+        <a href="#">Heewon Kim</a><sup>1,3</sup>
+      </div>
+      <div class="affil-row">
+        <sup>1</sup>&thinsp;Soongsil University&emsp;
+        <sup>2</sup>&thinsp;Vanderbilt University&emsp;
+        <sup>3</sup>&thinsp;Kairoba Inc.
+        <br>
+        <span class="eq-note"><sup class="eq">†</sup>&thinsp;Equal contribution</span>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="pub-links">
+      <a href="#" class="pub-btn pub-btn--primary">
+        <i class="fas fa-file-pdf"></i>&thinsp;Paper
+      </a>
+      <a href="#" class="pub-btn">
+        <i class="ai ai-arxiv"></i>&thinsp;arXiv
+      </a>
+      <a href="#" class="pub-btn">
+        <i class="fab fa-github"></i>&thinsp;Code
+      </a>
+      <a href="#" class="pub-btn">
+        <i class="fas fa-database"></i>&thinsp;Dataset
+      </a>
+      <a href="#" class="pub-btn">
+        <i class="fab fa-youtube"></i>&thinsp;Video
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TEASER / DEMO
+══════════════════════════════════════ -->
+<div class="cc-section cc-section--dark">
+  <div class="teaser-label">Simulation Demo</div>
+  <div class="demo-frame">
+    <!--
+      Place your demo GIF or video here.
+      Recommended: copy EEF-Cutting-Simulation/assets/demo.gif → static/images/demo.gif
+    -->
+    <img
+      src="./static/images/demo.gif"
+      alt="CulinaryCut: MLS-MPM deformable cutting simulation showing knife-food interaction">
+  </div>
+  <p class="teaser-cap">
+    MLS-MPM particle simulation of robotic food cutting. The framework models material deformation,
+    topology change, and EEF force feedback across 15 fruit types spanning three orders of magnitude
+    in Young's modulus.
+  </p>
+</div>
+
+<!-- ══════════════════════════════════════
+     ABSTRACT
+══════════════════════════════════════ -->
+<div class="cc-section">
+  <div class="eyebrow">Overview</div>
+  <div class="rule"></div>
+  <h2 class="sec-title">Abstract</h2>
+  <p class="abstract-body">
+    We present <strong>CulinaryCut</strong>, a physics-aware benchmark for training and evaluating
+    Vision-Language-Action (VLA) models on robotic food-cutting tasks. Existing manipulation
+    benchmarks treat objects as rigid bodies, ignoring the deformation and topological changes
+    fundamental to food preparation. We bridge this gap with a simulation framework built on
+    <strong>MLS-MPM</strong> — a particle-based method that captures material deformation and
+    fracture — coupled with a <strong>7-DoF robot arm</strong> in the ManiSkill environment.
+    Our benchmark provides over <strong>5,000 expert demonstrations</strong> across
+    <strong>7 food categories</strong>, paired with rich language annotations (≥5 per trajectory),
+    synchronized end-effector force measurements, and multi-view RGB observations. Two task
+    families expose distinct failure modes: <em>spatial-based cutting</em> (single-pass positional
+    grounding) and <em>division-based multi-cut</em> (long-horizon sequential planning with
+    cumulative deformation). We evaluate three state-of-the-art VLA baselines —
+    <strong>OpenVLA</strong>, <strong>Octo</strong>, and <strong>RDT-1B</strong> — and reveal
+    systematic failures in physical reasoning and multi-step planning that rigid-object benchmarks
+    fail to surface, motivating the development of physics-aware VLA architectures.
+  </p>
+</div>
+
+<!-- ══════════════════════════════════════
+     STATS
+══════════════════════════════════════ -->
+<div class="cc-section cc-section--surface">
+  <div class="eyebrow">Scale</div>
+  <div class="rule"></div>
+  <h2 class="sec-title">Dataset at a Glance</h2>
+  <div class="stats-row">
+    <div class="stat">
+      <span class="stat-num">5K+</span>
+      <span class="stat-lbl">Expert<br>Demonstrations</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">325K</span>
+      <span class="stat-lbl">Total<br>Trajectories</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">7</span>
+      <span class="stat-lbl">Food<br>Categories</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">≥5</span>
+      <span class="stat-lbl">Language Labels<br>per Trajectory</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">15</span>
+      <span class="stat-lbl">Fruit Types<br>Benchmarked</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <span class="stat-lbl">VLA Baselines<br>Evaluated</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FOOD CATEGORIES
+══════════════════════════════════════ -->
+<div class="cc-section">
+  <div class="eyebrow">Coverage</div>
+  <div class="rule"></div>
+  <h2 class="sec-title">Food Categories</h2>
+  <p class="sec-sub">
+    Spanning three orders of magnitude in Young's modulus — from 7&thinsp;kPa (banana) to 1&thinsp;GPa
+    (hard rind) — with material properties sourced from food science literature.
+  </p>
+
+  <div class="chip-cloud">
+    <span class="chip"><span class="dot dot-easy"></span>Banana</span>
+    <span class="chip"><span class="dot dot-easy"></span>Strawberry</span>
+    <span class="chip"><span class="dot dot-easy"></span>Peach</span>
+    <span class="chip"><span class="dot dot-easy"></span>Pear</span>
+    <span class="chip"><span class="dot dot-easy"></span>Apple</span>
+    <span class="chip"><span class="dot dot-med"></span>Kiwi</span>
+    <span class="chip"><span class="dot dot-med"></span>Tomato</span>
+    <span class="chip"><span class="dot dot-med"></span>Mango</span>
+    <span class="chip"><span class="dot dot-med"></span>Orange</span>
+    <span class="chip"><span class="dot dot-med"></span>Avocado</span>
+    <span class="chip"><span class="dot dot-hard"></span>Lemon</span>
+    <span class="chip"><span class="dot dot-hard"></span>Grape</span>
+    <span class="chip"><span class="dot dot-hard"></span>Persimmon</span>
+    <span class="chip"><span class="dot dot-hard"></span>Pineapple</span>
+    <span class="chip"><span class="dot dot-hard"></span>Watermelon</span>
+  </div>
+
+  <div class="tier-key">
+    <span><span class="dot dot-easy"></span>Easy &nbsp;(E &lt; 3 MPa)</span>
+    <span><span class="dot dot-med"></span>Medium &nbsp;(3–10 MPa)</span>
+    <span><span class="dot dot-hard"></span>Hard &nbsp;(E &gt; 10 MPa / rind)</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     TASK FAMILIES
+══════════════════════════════════════ -->
+<div class="cc-section cc-section--surface">
+  <div class="eyebrow">Benchmark Design</div>
+  <div class="rule"></div>
+  <h2 class="sec-title">Task Families</h2>
+  <p class="sec-sub">
+    Two complementary tasks expose distinct capability gaps in vision-language-action models.
+  </p>
+
+  <div class="task-grid">
+    <div class="task-card">
+      <span class="task-tag">TYPE 01</span>
+      <h3>Spatial-Based Cutting</h3>
+      <p>
+        The robot interprets spatial language — <em>"cut from the left side,"</em>
+        <em>"slice at one-third from the top"</em> — and executes a single downward
+        knife motion at the grounded position. Tests VLA spatial language comprehension
+        in a 3-D workspace with randomized object poses.
+      </p>
+    </div>
+    <div class="task-card">
+      <span class="task-tag">TYPE 02</span>
+      <h3>Division-Based Multi-Cut</h3>
+      <p>
+        The robot partitions food into N equal pieces through sequential passes. Each cut
+        must account for material deformation from prior cuts, requiring long-horizon geometric
+        planning. The largest performance gap between VLA baselines and optimal occurs here.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PIPELINE
+══════════════════════════════════════ -->
+<div class="cc-section">
+  <div class="eyebrow">System</div>
+  <div class="rule"></div>
+  <h2 class="sec-title">Data Collection Pipeline</h2>
+  <p class="sec-sub">
+    Expert demonstrations are collected via human teleoperation and motion planning,
+    then augmented with language descriptions and synchronized force logs.
+  </p>
+
+  <div class="pipeline">
+    <div class="pipe-step">
+      <div class="icon-wrap"><i class="fas fa-robot"></i></div>
+      <h4>ManiSkill Env</h4>
+      <p>7-DoF arm + knife EEF in GPU-accelerated simulation</p>
+    </div>
+    <div class="pipe-arrow"><i class="fas fa-chevron-right"></i></div>
+    <div class="pipe-step">
+      <div class="icon-wrap"><i class="fas fa-atom"></i></div>
+      <h4>MLS-MPM Physics</h4>
+      <p>Deformable body + topology change + force readout</p>
+    </div>
+    <div class="pipe-arrow"><i class="fas fa-chevron-right"></i></div>
+    <div class="pipe-step">
+      <div class="icon-wrap"><i class="fas fa-gamepad"></i></div>
+      <h4>Teleoperation</h4>
+      <p>Human demos + motion planner for spatial tasks</p>
+    </div>
+    <div class="pipe-arrow"><i class="fas fa-chevron-right"></i></div>
+    <div class="pipe-step">
+      <div class="icon-wrap"><i class="fas fa-language"></i></div>
+      <h4>Language + Force</h4>
+      <p>≥5 instructions per trajectory, synchronized EEF force</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     RESULTS
+══════════════════════════════════════ -->
+<div class="cc-section cc-section--surface">
+  <div class="eyebrow">Evaluation</div>
+  <div class="rule"></div>
+  <h2 class="sec-title">Baseline Comparison</h2>
+  <p class="sec-sub">
+    All models are fine-tuned on CulinaryCut demonstrations. The largest performance gap
+    appears on multi-cut tasks, where cumulative deformation and long-horizon planning are required.
+    Full quantitative results are in the paper.
+  </p>
+
+  <div class="table-wrap">
+    <table class="cc-table">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Single Cut SR&thinsp;(%)</th>
+          <th>Multi-Cut SR&thinsp;(%)</th>
+          <th>Force MAE&thinsp;(N)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OpenVLA</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Octo</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>RDT-1B</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="text-align:center; font-size:0.8rem; color:var(--muted); margin-top:1rem;">
+      See the paper for full quantitative results, ablation studies, and cross-object transfer results.
+      SR&nbsp;=&nbsp;Success Rate.
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     BIBTEX
+══════════════════════════════════════ -->
+<div class="cc-section">
+  <div class="eyebrow">Citation</div>
+  <div class="rule"></div>
+  <h2 class="sec-title">BibTeX</h2>
+
+  <div class="bib-box">
+    <button class="copy-btn" onclick="copyBib(this)" aria-label="Copy BibTeX">copy</button>
+    <pre id="bib-content">@inproceedings{koh2026culinarycut,
+  title     = {CulinaryCut: A Physics-Aware Benchmark for
+               Robotic Food Cutting in Deformable Simulation},
+  author    = {Koh, Hyunseo and Song, Chang-Yong and Choi, Youngjae
+               and Viveiros, Misa and Hyde, David and Kim, Heewon},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2026},
+}</pre>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="cc-footer">
+  <p>
+    &copy; 2026 CulinaryCut Authors.&ensp;
+    Website template inspired by
+    <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>
+    and
+    <a href="https://droid-dataset.github.io" target="_blank" rel="noopener">DROID</a>.
+  </p>
+</footer>
+
+<script>
+  function copyBib(btn) {
+    const text = document.getElementById('bib-content').textContent;
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = 'copied!';
+      setTimeout(function () { btn.textContent = 'copy'; }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
