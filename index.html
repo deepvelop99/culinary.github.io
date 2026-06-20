@@ -315,19 +315,16 @@
     <div class="sec-rule"></div>
     <h2 class="sec-title"><i class="fas fa-file-alt" style="margin-right:.4rem;"></i>Abstract</h2>
     <p class="abstract-body" style="margin-top:1.75rem;">
-      Existing robot manipulation benchmarks treat objects as rigid bodies, ignoring the deformation
-      and topological changes fundamental to food preparation. We introduce <strong>CulinaryCut</strong>,
-      a physics-aware benchmark for training and evaluating Vision-Language-Action (VLA) models on
-      robotic food-cutting tasks.<br><br>
-      Our simulation framework is built on <strong>MLS-MPM</strong> &mdash; a particle-based method
-      that captures material deformation and fracture &mdash; coupled with a 7-DoF robot arm in the
-      ManiSkill environment. The benchmark provides over <strong>5,000 expert demonstrations</strong>
-      across <strong>7 food categories</strong>, paired with rich language annotations (&ge;5 per
-      trajectory), synchronized end-effector force measurements, and multi-view RGB observations.<br><br>
-      We evaluate three state-of-the-art VLA baselines &mdash; <strong>OpenVLA</strong>,
-      <strong>Octo</strong>, and <strong>RDT-1B</strong> &mdash; and find systematic failures in
-      physical reasoning and multi-step planning that rigid-object benchmarks fail to expose,
-      motivating physics-aware VLA development.
+      Food cutting is a representative non-rigid manipulation task involving deformation, contact forces, and fractures, yet it remains largely unexplored in VLA research.
+      This is because most existing datasets are built around rigid objects and cannot jointly capture the physical forces, deformation, and topology changes that arise during cutting, together with precise spatial instructions.
+      To systematically diagnose these limitations, we propose the CulinaryCut benchmark.
+      CulinaryCut integrates an MPM-based physics simulator with a robot to provide 325K training instances (from 5{,}000 physically distinct trajectories) paired with force profiles and language instructions.
+      
+      The physical fidelity of the simulation is supported through contact force measurements on a real robotic arm.
+      Evaluation against three state-of-the-art VLA baselines highlights two structural limitations and motivates the need for a Vision-Language-Action formulation, specifically force-aware contact reasoning and object-centric spatial grounding.
+      First, current VLAs have no mechanism to reason about material stiffness or contact resistance, a physics gap that is inherent to their motion-only output design.
+      Second, VLAs cannot perceive object size and map ratios onto it, a geometry gap experimentally confirmed by success rates converging to 0\% under ratio-based commands and directional variations.
+      Together, these findings characterize the core challenges that must be addressed for VLAs to extend to deformable manipulation, and CulinaryCut provides a benchmark foundation that jointly addresses physics fidelity and spatial reasoning evaluation for deformable manipulation in VLA research.
     </p>
   </div>
 </div>
