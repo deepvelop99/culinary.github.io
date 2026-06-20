@@ -216,6 +216,9 @@
   .copy-btn { display:none; position:absolute; top:1rem; right:1rem; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.5); padding:.25rem .65rem; border-radius:3px; font-family:'IBM Plex Mono',monospace; font-size:.72rem; cursor:pointer; align-items:center; gap:.3rem; transition:background .18s,color .18s; }
   .copy-btn:hover { background:rgba(255,255,255,.18); color:#fff; }
 
+
+  .pub-btn--soon { opacity:.45; cursor:not-allowed; pointer-events:none; }
+  .soon-badge { font-size:.6rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; background:rgba(0,0,0,.18); color:inherit; padding:1px 6px; border-radius:2px; margin-left:5px; vertical-align:middle; }
   @media (max-width:600px) { .stats-grid { gap:1rem 2rem !important; } .inst-logos { gap:1.5rem !important; } }
   @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition-duration:.01ms !important; } }
   </style>
@@ -286,11 +289,11 @@
           </a>
         </div>
         <div class="pub-links">
-          <a href="#" class="pub-btn red"><i class="fas fa-file-pdf"></i>Paper</a>
+          <span class="pub-btn red pub-btn--soon"><i class="fas fa-file-pdf"></i>Paper<span class="soon-badge">Soon</span></span>
           <a href="https://arxiv.org/abs/2601.06451" class="pub-btn"><i class="ai ai-arxiv"></i>arXiv</a>
           <a href="#" class="pub-btn"><i class="fab fa-youtube"></i>Video</a>
           <a href="#" class="pub-btn"><i class="fab fa-github"></i>Code</a>
-          <a href="#" class="pub-btn"><i class="fas fa-database"></i>Dataset</a>
+          <span class="pub-btn pub-btn--soon"><i class="fas fa-database"></i>Dataset<span class="soon-badge">Soon</span></span>
         </div>
       </div>
     </div>
