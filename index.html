@@ -2,13 +2,12 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-        content="CulinaryCut: A Physics-Aware Benchmark for Robotic Food Cutting in Deformable Simulation">
-  <meta name="keywords" content="CulinaryCut, VLA, Vision Language Action, Robotic Cutting, Food Cutting, Deformable Simulation, MLS-MPM, Benchmark, ECCV 2026">
+  <meta name="description" content="CulinaryCut: A Physics-Aware Benchmark for Robotic Food Cutting in Deformable Simulation">
+  <meta name="keywords" content="CulinaryCut, VLA, Robotic Cutting, Food Cutting, Deformable Simulation, MLS-MPM, ECCV 2026">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CulinaryCut</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600;700&family=Google+Sans:wght@400;700&family=Noto+Sans:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
@@ -21,9 +20,393 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
-</head>
-<body>
 
+  <style>
+    /* ═══════════════════════════════════════════════
+       THEME SYSTEM
+       body[data-theme="modern"]  = IBM Plex Mono + red (default)
+       body[data-theme="classic"] = NerfIES / Google Sans
+    ═══════════════════════════════════════════════ */
+
+    /* ── Shared resets ── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* ══════════════════════
+       MODERN THEME (default)
+    ══════════════════════ */
+    body[data-theme="modern"] {
+      font-family: 'Inter', sans-serif;
+    }
+
+    body[data-theme="modern"] .publication-title {
+      font-family: 'IBM Plex Mono', monospace !important;
+      letter-spacing: -0.025em !important;
+    }
+
+    body[data-theme="modern"] .title.is-1.publication-title {
+      font-size: clamp(2.2rem, 5vw, 3.2rem) !important;
+      font-weight: 700 !important;
+    }
+
+    body[data-theme="modern"] .title.is-3.publication-title {
+      font-size: clamp(1rem, 2.5vw, 1.35rem) !important;
+      font-weight: 300 !important;
+      color: #6B7280 !important;
+    }
+
+    /* Venue badge - modern */
+    body[data-theme="modern"] .venue-display {
+      display: inline-block !important;
+      background: #D63031;
+      color: #fff;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.35rem 1.1rem;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+    body[data-theme="modern"] .venue-display-classic { display: none !important; }
+
+    /* Buttons - modern */
+    body[data-theme="modern"] .external-link.button.is-dark {
+      border-radius: 3px !important;
+      font-weight: 600;
+      background: transparent !important;
+      border: 2px solid #1A1A2E !important;
+      color: #1A1A2E !important;
+      transition: background 0.18s, color 0.18s;
+    }
+    body[data-theme="modern"] .external-link.button.is-dark:hover {
+      background: #1A1A2E !important;
+      color: #fff !important;
+    }
+    body[data-theme="modern"] .link-block:first-child .external-link.button.is-dark {
+      background: #D63031 !important;
+      border-color: #D63031 !important;
+      color: #fff !important;
+    }
+    body[data-theme="modern"] .link-block:first-child .external-link.button.is-dark:hover {
+      background: #b52626 !important;
+      border-color: #b52626 !important;
+    }
+
+    /* Teaser section - modern: dark bg */
+    body[data-theme="modern"] section.hero.teaser {
+      background: #0E1117 !important;
+    }
+    body[data-theme="modern"] section.hero.teaser .hero-body {
+      padding: 3rem 1.5rem;
+    }
+    body[data-theme="modern"] section.hero.teaser .subtitle {
+      color: rgba(255,255,255,0.5) !important;
+      font-family: 'Inter', sans-serif;
+    }
+    body[data-theme="modern"] section.hero.teaser .subtitle strong {
+      color: rgba(255,255,255,0.85) !important;
+    }
+    body[data-theme="modern"] .teaser-label-modern {
+      display: block !important;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Section headings - modern */
+    body[data-theme="modern"] h2.title.is-3 {
+      font-family: 'IBM Plex Mono', monospace !important;
+    }
+    body[data-theme="modern"] h3.title.is-4,
+    body[data-theme="modern"] h3.title.is-5 {
+      font-family: 'IBM Plex Mono', monospace !important;
+    }
+
+    /* Stats - modern */
+    body[data-theme="modern"] .stat-num {
+      color: #D63031 !important;
+    }
+
+    /* Task cards - modern: red top border */
+    body[data-theme="modern"] .task-card-inner {
+      border-top: 3px solid #D63031 !important;
+    }
+    body[data-theme="modern"] .task-type-label {
+      color: #D63031 !important;
+    }
+
+    /* Table header - modern */
+    body[data-theme="modern"] .cc-table-head {
+      background: #1A1A2E !important;
+    }
+
+    /* BibTeX - modern: dark box */
+    body[data-theme="modern"] .bibtex-wrap {
+      background: #0E1117 !important;
+      border-radius: 6px;
+      padding: 2rem;
+      position: relative;
+    }
+    body[data-theme="modern"] .bibtex-wrap pre,
+    body[data-theme="modern"] .bibtex-wrap code {
+      background: transparent !important;
+      color: #CBD5E1 !important;
+      font-family: 'IBM Plex Mono', monospace !important;
+    }
+    body[data-theme="modern"] .copy-btn {
+      display: flex !important;
+    }
+
+    /* Author links - modern */
+    body[data-theme="modern"] .publication-authors a {
+      color: #2D3561 !important;
+    }
+
+    /* Logo filter - modern: slight grayscale */
+    body[data-theme="modern"] .inst-logo {
+      filter: grayscale(10%) !important;
+    }
+
+    /* ══════════════════════
+       CLASSIC THEME (toggle)
+    ══════════════════════ */
+    body[data-theme="classic"] {
+      font-family: 'Google Sans', 'Noto Sans', sans-serif;
+    }
+
+    body[data-theme="classic"] .publication-title {
+      font-family: 'Google Sans', 'Noto Sans', sans-serif !important;
+      letter-spacing: normal !important;
+    }
+
+    body[data-theme="classic"] .venue-display {
+      display: none !important;
+    }
+    body[data-theme="classic"] .venue-display-classic {
+      display: block !important;
+    }
+
+    body[data-theme="classic"] .external-link.button.is-dark {
+      border-radius: 9999px !important;
+      background: #363636 !important;
+      border-color: #363636 !important;
+      color: #fff !important;
+    }
+    body[data-theme="classic"] .external-link.button.is-dark:hover {
+      background: #4a4a4a !important;
+    }
+
+    body[data-theme="classic"] section.hero.teaser {
+      background: transparent !important;
+    }
+    body[data-theme="classic"] section.hero.teaser .subtitle {
+      color: #4a4a4a !important;
+    }
+    body[data-theme="classic"] section.hero.teaser .subtitle strong {
+      color: #363636 !important;
+    }
+    body[data-theme="classic"] .teaser-label-modern {
+      display: none !important;
+    }
+
+    body[data-theme="classic"] h2.title.is-3 {
+      font-family: 'Google Sans', sans-serif !important;
+    }
+
+    body[data-theme="classic"] .stat-num {
+      color: #363636 !important;
+    }
+
+    body[data-theme="classic"] .task-card-inner {
+      border-top: 3px solid #363636 !important;
+    }
+    body[data-theme="classic"] .task-type-label {
+      color: #888 !important;
+    }
+
+    body[data-theme="classic"] .cc-table-head {
+      background: #363636 !important;
+    }
+
+    body[data-theme="classic"] .bibtex-wrap {
+      background: transparent !important;
+      padding: 0 !important;
+    }
+    body[data-theme="classic"] .bibtex-wrap pre {
+      background: #f5f5f5 !important;
+      color: #363636 !important;
+      font-family: monospace !important;
+    }
+    body[data-theme="classic"] .copy-btn {
+      display: none !important;
+    }
+
+    body[data-theme="classic"] .publication-authors a {
+      color: #3273dc !important;
+    }
+
+    body[data-theme="classic"] .inst-logo {
+      filter: none !important;
+    }
+
+    /* ═══════════════════════
+       TOGGLE BUTTON STYLING
+    ═══════════════════════ */
+    #theme-toggle-btn {
+      cursor: pointer;
+      border: none;
+      background: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #555;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      transition: background 0.18s, color 0.18s;
+      white-space: nowrap;
+    }
+    #theme-toggle-btn:hover {
+      background: #f0f0f0;
+      color: #222;
+    }
+    #theme-toggle-btn .toggle-icon {
+      font-size: 1rem;
+      transition: transform 0.3s;
+    }
+    body[data-theme="classic"] #theme-toggle-btn .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    /* ═══════════
+       SHARED COMPONENTS
+    ═══════════ */
+    .stat-num {
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1;
+      display: block;
+      transition: color 0.3s;
+    }
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: #777;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-top: 4px;
+      display: block;
+      line-height: 1.4;
+    }
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.25rem 3.5rem;
+      margin-bottom: 3rem;
+    }
+    .stat-item { text-align: center; }
+
+    .task-card-inner {
+      border: 1px solid #ddd;
+      border-radius: 0 0 6px 6px;
+      padding: 1.5rem;
+      height: 100%;
+      transition: border-top-color 0.3s;
+    }
+    .task-type-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+      transition: color 0.3s;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: .875rem;
+      background: #fff;
+    }
+    .dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+    .dot-easy { background:#10B981; }
+    .dot-med  { background:#F59E0B; }
+    .dot-hard { background:#EF4444; }
+
+    .inst-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .inst-logo {
+      height: 46px;
+      object-fit: contain;
+      transition: filter 0.3s;
+    }
+    .inst-name-text {
+      font-size: .9rem;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.5);
+      padding: .25rem .65rem;
+      border-radius: 3px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background 0.18s, color 0.18s;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,0.18); color:#fff; }
+
+    .bibtex-wrap { position: relative; transition: background 0.3s; }
+
+    /* Transition for smooth theme switching */
+    body { transition: background 0.3s; }
+    section.hero.teaser { transition: background 0.35s; }
+    section.hero.teaser .subtitle { transition: color 0.35s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body data-theme="modern">
+
+<!-- ─── Navbar ─── -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -33,7 +416,7 @@
     </a>
   </div>
   <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+    <div class="navbar-start" style="flex-grow:1; justify-content:center;">
       <a class="navbar-item" href="https://github.com/deepvelop99/">
         <span class="icon"><i class="fas fa-home"></i></span>
       </a>
@@ -44,21 +427,34 @@
         </div>
       </div>
     </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <button id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle page style">
+          <span class="toggle-icon">◑</span>
+          <span id="theme-label">Classic View</span>
+        </button>
+      </div>
+    </div>
   </div>
 </nav>
 
+<!-- ─── Hero ─── -->
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
+
+          <!-- venue: modern = badge, classic = h4 -->
+          <span class="venue-display">ECCV 2026</span>
+          <h4 class="title is-4 venue-display-classic" style="display:none;">ECCV 2026</h4>
+
           <h1 class="title is-1 publication-title">CulinaryCut</h1>
-          <h1 class="title is-3 publication-title" style="margin-top:-10px;">
+          <h1 class="title is-3 publication-title" style="margin-top:-8px;">
             A Physics-Aware Benchmark for Robotic Food Cutting<br>in Deformable Simulation
           </h1>
-          <h4 class="title is-4">ECCV 2026</h4>
 
-          <div class="is-size-5 publication-authors">
+          <div class="is-size-5 publication-authors" style="margin-top:1rem;">
             <span class="author-block"><a href="#">Hyunseo Koh</a><sup>*,1,3</sup>,</span>
             <span class="author-block"><a href="#">Chang-Yong Song</a><sup>*,2</sup>,</span>
             <span class="author-block"><a href="#">Youngjae Choi</a><sup>*,1</sup>,</span>
@@ -66,7 +462,6 @@
             <span class="author-block"><a href="#">David Hyde</a><sup>2</sup>,</span>
             <span class="author-block"><a href="#">Heewon Kim</a><sup>1,3</sup></span>
           </div>
-
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Soongsil University,&nbsp;</span>
             <span class="author-block"><sup>2</sup>Vanderbilt University,&nbsp;</span>
@@ -76,69 +471,62 @@
             <sup>*</sup>Equal contribution
           </div>
 
-
-          <!-- Institution Logos -->
-          <div style="display:flex; align-items:center; justify-content:center; gap:2.5rem; margin-top:1.5rem; margin-bottom:0.5rem; flex-wrap:wrap;">
+          <!-- Institution logos -->
+          <div class="inst-logos">
             <a href="https://www.ssu.ac.kr" target="_blank" rel="noopener">
-              <img src="./static/images/logo_soongsil.jpg"
-                   alt="Soongsil University"
-                   style="height:48px; object-fit:contain; filter:grayscale(20%);">
+              <img src="./static/images/logo_soongsil.jpg" alt="Soongsil University" class="inst-logo">
             </a>
             <a href="https://www.vanderbilt.edu" target="_blank" rel="noopener">
-              <img src="./static/images/logo_vanderbilt.png"
-                   alt="Vanderbilt University"
-                   style="height:48px; object-fit:contain; filter:grayscale(20%);">
+              <img src="./static/images/logo_vanderbilt.png" alt="Vanderbilt University" class="inst-logo">
             </a>
-            <span style="font-size:.9rem; font-weight:600; color:#555; letter-spacing:.03em;">Kairoba Inc.</span>
+            <span class="inst-name-text">Kairoba Inc.</span>
           </div>
 
+          <!-- Buttons -->
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
                 <a href="#" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                  <span>Paper</span>
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
                 </a>
               </span>
               <span class="link-block">
                 <a href="#" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="ai ai-arxiv"></i></span>
-                  <span>arXiv</span>
+                  <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
                 </a>
               </span>
               <span class="link-block">
                 <a href="#" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fab fa-youtube"></i></span>
-                  <span>Video</span>
+                  <span class="icon"><i class="fab fa-youtube"></i></span><span>Video</span>
                 </a>
               </span>
               <span class="link-block">
                 <a href="#" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fab fa-github"></i></span>
-                  <span>Code</span>
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
                 </a>
               </span>
               <span class="link-block">
                 <a href="#" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-database"></i></span>
-                  <span>Dataset</span>
+                  <span class="icon"><i class="fas fa-database"></i></span><span>Dataset</span>
                 </a>
               </span>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Teaser -->
+<!-- ─── Teaser ─── -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
+      <span class="teaser-label-modern" style="display:block;">Simulation Demo</span>
       <img src="./static/images/demo.gif"
-           alt="CulinaryCut simulation: MLS-MPM deformable food cutting with a robotic arm"
-           style="max-width:100%; border-radius:6px; margin-bottom:20px;" />
+           alt="CulinaryCut: MLS-MPM deformable food cutting simulation"
+           style="max-width:100%; border-radius:6px; margin-bottom:20px;">
       <h2 class="subtitle has-text-centered">
         <span style="font-size:1.0em; font-weight:normal;">
           We introduce <strong>CulinaryCut</strong>, a physics-aware benchmark for evaluating
@@ -151,7 +539,7 @@
   </div>
 </section>
 
-<!-- Abstract -->
+<!-- ─── Abstract ─── -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -171,16 +559,14 @@
             <strong>5,000 expert demonstrations</strong> across <strong>7 food categories</strong>,
             paired with rich language annotations (&#8805;5 per trajectory), synchronized
             end-effector force measurements, and multi-view RGB observations.
-            We define two task families: <em>spatial-based cutting</em>, which requires
-            grounding of positional language in 3D, and <em>division-based multi-cut</em>,
-            which demands long-horizon sequential planning under cumulative material deformation.
+            We define two task families: <em>spatial-based cutting</em> and
+            <em>division-based multi-cut</em>.
           </p>
           <p>
             We evaluate three state-of-the-art VLA baselines —
             <strong>OpenVLA</strong>, <strong>Octo</strong>, and <strong>RDT-1B</strong> —
             and find systematic failures in physical reasoning and multi-step planning that
-            rigid-object benchmarks fail to expose. Our results reveal the largest performance
-            gap on multi-cut tasks, motivating the development of physics-aware VLA architectures.
+            rigid-object benchmarks fail to expose, motivating physics-aware VLA development.
           </p>
         </div>
       </div>
@@ -188,109 +574,87 @@
   </div>
 </section>
 
-<!-- Dataset -->
+<!-- ─── Dataset ─── -->
 <section class="section" style="background:#fafafa; border-top:1px solid #eee; border-bottom:1px solid #eee;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Dataset</h2>
 
-        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem 3rem; margin-bottom:3rem;">
-          <div style="text-align:center;">
-            <div style="font-size:2.5rem; font-weight:900; color:#363636; line-height:1;">5K+</div>
-            <div style="font-size:0.8rem; color:#777; font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin-top:4px;">Expert<br>Demonstrations</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:2.5rem; font-weight:900; color:#363636; line-height:1;">325K</div>
-            <div style="font-size:0.8rem; color:#777; font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin-top:4px;">Total<br>Trajectories</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:2.5rem; font-weight:900; color:#363636; line-height:1;">7</div>
-            <div style="font-size:0.8rem; color:#777; font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin-top:4px;">Food<br>Categories</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:2.5rem; font-weight:900; color:#363636; line-height:1;">&#8805;5</div>
-            <div style="font-size:0.8rem; color:#777; font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin-top:4px;">Language Labels<br>per Trajectory</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:2.5rem; font-weight:900; color:#363636; line-height:1;">15</div>
-            <div style="font-size:0.8rem; color:#777; font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin-top:4px;">Fruit Types<br>Benchmarked</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:2.5rem; font-weight:900; color:#363636; line-height:1;">3</div>
-            <div style="font-size:0.8rem; color:#777; font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin-top:4px;">VLA Baselines<br>Evaluated</div>
-          </div>
+        <div class="stats-row">
+          <div class="stat-item"><span class="stat-num">5K+</span><span class="stat-lbl">Expert<br>Demonstrations</span></div>
+          <div class="stat-item"><span class="stat-num">325K</span><span class="stat-lbl">Total<br>Trajectories</span></div>
+          <div class="stat-item"><span class="stat-num">7</span><span class="stat-lbl">Food<br>Categories</span></div>
+          <div class="stat-item"><span class="stat-num">&#8805;5</span><span class="stat-lbl">Language Labels<br>per Trajectory</span></div>
+          <div class="stat-item"><span class="stat-num">15</span><span class="stat-lbl">Fruit Types<br>Benchmarked</span></div>
+          <div class="stat-item"><span class="stat-num">3</span><span class="stat-lbl">VLA Baselines<br>Evaluated</span></div>
         </div>
 
         <h3 class="title is-4">Food Categories</h3>
         <div class="content has-text-justified">
           <p>
-            CulinaryCut spans <strong>three orders of magnitude</strong> in Young's modulus
-            (7&thinsp;kPa &rarr; 1&thinsp;GPa) with material properties from food science literature.
-            Each fruit is procedurally meshed and assigned physics-grounded parameters
-            (Young's modulus E, Poisson's ratio &#957;, density &#961;, yield stress &#963;<sub>y</sub>).
+            Spanning <strong>three orders of magnitude</strong> in Young's modulus
+            (7&thinsp;kPa &#8594; 1&thinsp;GPa) with material properties from food science literature.
           </p>
         </div>
 
-        <div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:1rem 0;">
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#10B981;flex-shrink:0;"></span>Banana</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#10B981;flex-shrink:0;"></span>Strawberry</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#10B981;flex-shrink:0;"></span>Peach</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#10B981;flex-shrink:0;"></span>Pear</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#10B981;flex-shrink:0;"></span>Apple</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#F59E0B;flex-shrink:0;"></span>Kiwi</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#F59E0B;flex-shrink:0;"></span>Tomato</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#F59E0B;flex-shrink:0;"></span>Mango</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#F59E0B;flex-shrink:0;"></span>Orange</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#F59E0B;flex-shrink:0;"></span>Avocado</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#EF4444;flex-shrink:0;"></span>Lemon</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#EF4444;flex-shrink:0;"></span>Grape</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#EF4444;flex-shrink:0;"></span>Persimmon</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#EF4444;flex-shrink:0;"></span>Pineapple</span>
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border:1px solid #ddd;border-radius:20px;font-size:.875rem;background:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#EF4444;flex-shrink:0;"></span>Watermelon</span>
+        <div class="chip-row">
+          <span class="chip"><span class="dot dot-easy"></span>Banana</span>
+          <span class="chip"><span class="dot dot-easy"></span>Strawberry</span>
+          <span class="chip"><span class="dot dot-easy"></span>Peach</span>
+          <span class="chip"><span class="dot dot-easy"></span>Pear</span>
+          <span class="chip"><span class="dot dot-easy"></span>Apple</span>
+          <span class="chip"><span class="dot dot-med"></span>Kiwi</span>
+          <span class="chip"><span class="dot dot-med"></span>Tomato</span>
+          <span class="chip"><span class="dot dot-med"></span>Mango</span>
+          <span class="chip"><span class="dot dot-med"></span>Orange</span>
+          <span class="chip"><span class="dot dot-med"></span>Avocado</span>
+          <span class="chip"><span class="dot dot-hard"></span>Lemon</span>
+          <span class="chip"><span class="dot dot-hard"></span>Grape</span>
+          <span class="chip"><span class="dot dot-hard"></span>Persimmon</span>
+          <span class="chip"><span class="dot dot-hard"></span>Pineapple</span>
+          <span class="chip"><span class="dot dot-hard"></span>Watermelon</span>
         </div>
-        <div style="display:flex;justify-content:center;gap:1.5rem;font-size:.8rem;color:#666;">
-          <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10B981;margin-right:4px;"></span>Easy (E &lt; 3 MPa)</span>
-          <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#F59E0B;margin-right:4px;"></span>Medium</span>
-          <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#EF4444;margin-right:4px;"></span>Hard (E &gt; 10 MPa)</span>
+        <div style="display:flex;justify-content:center;gap:1.5rem;font-size:.78rem;color:#666;margin-top:.5rem;">
+          <span><span class="dot dot-easy" style="display:inline-block;margin-right:4px;"></span>Easy (E &lt; 3 MPa)</span>
+          <span><span class="dot dot-med" style="display:inline-block;margin-right:4px;"></span>Medium</span>
+          <span><span class="dot dot-hard" style="display:inline-block;margin-right:4px;"></span>Hard (E &gt; 10 MPa)</span>
         </div>
-
       </div>
     </div>
   </div>
 </section>
 
-<!-- Task Families -->
+<!-- ─── Task Families ─── -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3 has-text-centered">Task Families</h2>
         <div class="content has-text-justified">
-          <p>CulinaryCut defines two complementary task families that expose distinct capability gaps in current VLA models.</p>
+          <p>Two complementary task families expose distinct capability gaps in current VLA models.</p>
         </div>
         <div class="columns">
           <div class="column">
-            <div style="border:1px solid #ddd; border-top:3px solid #363636; border-radius:0 0 6px 6px; padding:1.5rem; height:100%;">
-              <p style="font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#888; margin-bottom:.5rem;">Task Type 01</p>
+            <div class="task-card-inner">
+              <p class="task-type-label">Task Type 01</p>
               <h3 class="title is-5">Spatial-Based Cutting</h3>
               <div class="content">
-                <p>The robot interprets spatial language instructions —
+                <p>The robot interprets spatial language —
                 <em>"cut from the left side," "slice at one-third from the top"</em> —
-                and executes a single downward knife motion at the grounded 3D position.
-                Object pose is randomized across episodes to prevent positional overfitting.</p>
+                and executes a single downward knife pass at the grounded 3D position.
+                Object pose is randomized to prevent positional overfitting.</p>
               </div>
             </div>
           </div>
           <div class="column">
-            <div style="border:1px solid #ddd; border-top:3px solid #363636; border-radius:0 0 6px 6px; padding:1.5rem; height:100%;">
-              <p style="font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#888; margin-bottom:.5rem;">Task Type 02</p>
+            <div class="task-card-inner">
+              <p class="task-type-label">Task Type 02</p>
               <h3 class="title is-5">Division-Based Multi-Cut</h3>
               <div class="content">
-                <p>The robot partitions food into N equal pieces through sequential cutting passes.
-                Each pass must account for material deformation from prior cuts, requiring
-                long-horizon geometric planning. All VLA baselines exhibit the largest
-                performance drop on this task family.</p>
+                <p>The robot partitions food into N equal pieces through sequential passes.
+                Each cut must account for prior deformation, requiring long-horizon geometric
+                planning. All baselines show the largest performance drop here.</p>
               </div>
             </div>
           </div>
@@ -300,7 +664,7 @@
   </div>
 </section>
 
-<!-- Simulation -->
+<!-- ─── Simulation ─── -->
 <section class="section" style="background:#fafafa; border-top:1px solid #eee; border-bottom:1px solid #eee;">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
@@ -308,25 +672,23 @@
         <h2 class="title is-3 has-text-centered">Simulation &amp; Data Collection</h2>
         <div class="content has-text-justified">
           <p>
-            <strong>Physics Engine &#8212; MLS-MPM.</strong>
+            <strong>Physics Engine — MLS-MPM.</strong>
             We use the Moving Least Squares Material Point Method (MLS-MPM), a particle-based
-            continuum solver that naturally handles large deformations and topology changes (fracture).
-            Material parameters are assigned per food type from literature and swept across
-            &#177;10% Gaussian noise to establish robustness to parameter uncertainty.
+            continuum solver that handles large deformations and topology changes.
+            Material parameters (E, &#957;, &#961;, &#963;<sub>y</sub>) are set per food type from
+            literature and swept with &#177;10% Gaussian noise to verify robustness.
           </p>
           <p>
-            <strong>Robot Environment &#8212; ManiSkill.</strong>
-            A 7-DoF robot arm with a knife end-effector operates inside the ManiSkill simulator.
-            The simulation runs on GPU, enabling high-throughput parallel data collection.
+            <strong>Robot Environment — ManiSkill.</strong>
+            A 7-DoF arm with a knife EEF runs in the GPU-accelerated ManiSkill simulator.
             Multi-view RGB observations are rendered from randomized camera configurations.
           </p>
           <p>
             <strong>Data Collection.</strong>
-            Expert demonstrations are generated via human teleoperation (spatial tasks) and a
-            motion planner (multi-cut tasks). Each trajectory is annotated with
-            &#8805;5 paraphrased natural language instructions and synchronized end-effector force logs.
-            The dataset contains <strong>5,000+ base demonstrations</strong> and
-            <strong>325K total trajectories</strong> after augmentation.
+            Expert demonstrations come from human teleoperation and a motion planner.
+            Each trajectory is annotated with &#8805;5 language instructions and
+            synchronized EEF force logs.
+            Final dataset: <strong>5,000+ base demos</strong>, <strong>325K total trajectories</strong>.
           </p>
         </div>
       </div>
@@ -334,7 +696,7 @@
   </div>
 </section>
 
-<!-- Results -->
+<!-- ─── Results ─── -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
@@ -343,16 +705,14 @@
         <h3 class="title is-4">Baseline Comparison</h3>
         <div class="content has-text-justified">
           <p>
-            We fine-tune three state-of-the-art VLA models on CulinaryCut demonstrations
-            and evaluate on held-out episodes. The largest performance gap appears on
-            <strong>division-based multi-cut</strong> tasks.
-            Full quantitative results and ablation studies are in the paper.
+            All models are fine-tuned on CulinaryCut demonstrations. The largest gap appears on
+            <strong>division-based multi-cut</strong> tasks. Full results and ablations in the paper.
           </p>
         </div>
         <div style="overflow-x:auto; margin-top:1.5rem;">
           <table class="table is-bordered is-striped is-hoverable is-fullwidth">
             <thead>
-              <tr style="background:#363636;">
+              <tr class="cc-table-head" style="transition: background 0.3s;">
                 <th style="color:#fff;">Model</th>
                 <th style="color:#fff; text-align:center;">Single Cut SR (%)</th>
                 <th style="color:#fff; text-align:center;">Multi-Cut SR (%)</th>
@@ -366,18 +726,22 @@
               <tr><td><strong>RDT-1B</strong></td><td style="text-align:center;">&#8212;</td><td style="text-align:center;">&#8212;</td><td style="text-align:center;">&#8212;</td><td style="text-align:center;">&#8212;</td></tr>
             </tbody>
           </table>
-          <p style="font-size:.82rem; color:#888;">SR = Success Rate. Numbers will be updated on camera-ready.</p>
+          <p style="font-size:.82rem; color:#888;">SR = Success Rate. Numbers updated on camera-ready.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BibTeX -->
+<!-- ─── BibTeX ─── -->
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{koh2026culinarycut,
+    <div class="bibtex-wrap">
+      <button class="copy-btn" onclick="copyBib(this)" aria-label="Copy BibTeX">
+        <i class="fas fa-copy"></i> copy
+      </button>
+      <pre><code id="bib-text">@inproceedings{koh2026culinarycut,
   title     = {CulinaryCut: A Physics-Aware Benchmark for
                Robotic Food Cutting in Deformable Simulation},
   author    = {Koh, Hyunseo and Song, Chang-Yong and Choi, Youngjae
@@ -385,9 +749,11 @@
   booktitle = {European Conference on Computer Vision (ECCV)},
   year      = {2026},
 }</code></pre>
+    </div>
   </div>
 </section>
 
+<!-- ─── Footer ─── -->
 <footer class="footer">
   <div class="container">
     <div class="columns is-centered">
@@ -395,13 +761,62 @@
         <div class="content has-text-centered">
           <p>
             This website is based on the
-            <a href="https://nerfies.github.io" target="_blank">Nerfies</a> template.
+            <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> template.
           </p>
         </div>
       </div>
     </div>
   </div>
 </footer>
+
+<script>
+  // ── Theme toggle ──
+  var THEMES = ['modern', 'classic'];
+  var LABELS = { modern: 'Classic View', classic: 'Modern View' };
+
+  function toggleTheme() {
+    var body = document.body;
+    var current = body.getAttribute('data-theme') || 'modern';
+    var next = current === 'modern' ? 'classic' : 'modern';
+    body.setAttribute('data-theme', next);
+    document.getElementById('theme-label').textContent = LABELS[next];
+    try { localStorage.setItem('cc-theme', next); } catch(e) {}
+  }
+
+  // Restore saved theme
+  (function() {
+    try {
+      var saved = localStorage.getItem('cc-theme');
+      if (saved && THEMES.indexOf(saved) !== -1) {
+        document.body.setAttribute('data-theme', saved);
+        document.getElementById('theme-label').textContent = LABELS[saved];
+      }
+    } catch(e) {}
+  })();
+
+  // ── BibTeX copy ──
+  function copyBib(btn) {
+    var text = document.getElementById('bib-text').textContent;
+    navigator.clipboard.writeText(text).then(function() {
+      btn.innerHTML = '<i class="fas fa-check"></i> copied!';
+      setTimeout(function() {
+        btn.innerHTML = '<i class="fas fa-copy"></i> copy';
+      }, 2000);
+    });
+  }
+
+  // ── Navbar burger ──
+  document.addEventListener('DOMContentLoaded', function() {
+    var burger = document.querySelector('.navbar-burger');
+    var menu = document.querySelector('.navbar-menu');
+    if (burger && menu) {
+      burger.addEventListener('click', function() {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
