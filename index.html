@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="CulinaryCut: A Physics-Aware Benchmark for Robotic Food Cutting in Deformable Simulation. ECCV 2026.">
+  <meta name="description" content="CulinaryCut: A Physics-Grounded Cutting Benchmark for Vision-Language-Action Models. ECCV 2026.">
   <meta name="keywords" content="CulinaryCut, VLA, Robotic Cutting, Food Cutting, MLS-MPM, ECCV 2026">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CulinaryCut — ECCV 2026</title>
@@ -223,7 +223,7 @@
   @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition-duration:.01ms !important; } }
   </style>
 </head>
-<body data-theme="modern">
+<body data-theme="classic">
 
 <!-- NAVBAR -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -247,7 +247,7 @@
       <div class="navbar-item">
         <button id="theme-btn" onclick="toggleTheme()" aria-label="Switch style">
           <span class="tog">&#9681;</span>
-          <span id="theme-lbl">Classic View</span>
+          <span id="theme-lbl">Modern View</span>
         </button>
       </div>
     </div>
@@ -261,7 +261,7 @@
       <div style="text-align:center;">
         <span class="venue-m">ECCV 2026</span>
         <h4 class="title is-4 venue-c" style="display:none;">ECCV 2026</h4>
-        <h1 class="pub-title-main">CulinaryCut: A Physics-Aware Benchmark for Robotic Food Cutting in Deformable Simulation</h1>
+        <h1 class="pub-title-main">CulinaryCut: A Physics-Grounded Cutting Benchmark for Vision-Language-Action Models</h1>
         <div class="pub-authors">
           <a href="#">Hyunseo Koh</a><sup>&#10013;,1,3</sup>,&ensp;
           <a href="#">Chang-Yong Song</a><sup>&#10013;,2</sup>,&ensp;
@@ -305,7 +305,11 @@
   <div class="teaser-img">
     <img src="./static/images/demo.gif" alt="CulinaryCut: MLS-MPM deformable food cutting simulation">
   </div>
-  <p class="teaser-cap">MLS-MPM particle simulation of robotic food cutting. The framework models material deformation, topology change, and EEF force feedback across 15 fruit types spanning three orders of magnitude in Young&rsquo;s modulus.</p>
+  <p class="teaser-cap">
+      MLS-MPM particle simulation of robotic food cutting. The framework models
+      material deformation, topology change, and contact-force profiles across
+      15 food items with diverse geometric and material properties.
+    </p>
 </div>
 
 <!-- ABSTRACT -->
@@ -359,45 +363,64 @@
     <div class="sec-rule"></div>
     <h2 class="sec-title"><i class="fas fa-database" style="margin-right:.4rem;"></i>Dataset</h2>
     <div class="stats-grid" style="margin-top:2.5rem;">
-      <div class="stat-item"><span class="stat-ico"><i class="fas fa-robot"></i></span><span class="stat-num">5K+</span><span class="stat-lbl">Expert<br>Demonstrations</span></div>
-      <div class="stat-item"><span class="stat-ico"><i class="fas fa-route"></i></span><span class="stat-num">325K</span><span class="stat-lbl">Total<br>Trajectories</span></div>
-      <div class="stat-item"><span class="stat-ico"><i class="fas fa-apple-alt"></i></span><span class="stat-num">7</span><span class="stat-lbl">Food<br>Categories</span></div>
-      <div class="stat-item"><span class="stat-ico"><i class="fas fa-language"></i></span><span class="stat-num">&ge;5</span><span class="stat-lbl">Language Labels<br>/ Trajectory</span></div>
-      <div class="stat-item"><span class="stat-ico"><i class="fas fa-seedling"></i></span><span class="stat-num">15</span><span class="stat-lbl">Fruit Types<br>Benchmarked</span></div>
-      <div class="stat-item"><span class="stat-ico"><i class="fas fa-brain"></i></span><span class="stat-num">3</span><span class="stat-lbl">VLA Baselines<br>Evaluated</span></div>
+<div class="stat-item">
+  <span class="stat-ico"><i class="fas fa-database"></i></span>
+  <span class="stat-num">1.57M</span>
+  <span class="stat-lbl">Total<br>Instances</span>
+</div>
+
+<div class="stat-item">
+  <span class="stat-ico"><i class="fas fa-route"></i></span>
+  <span class="stat-num">21K</span>
+  <span class="stat-lbl">Cutting<br>Trajectories</span>
+</div>
+
+<div class="stat-item">
+  <span class="stat-ico"><i class="fas fa-apple-alt"></i></span>
+  <span class="stat-num">15</span>
+  <span class="stat-lbl">Food<br>Items</span>
+</div>
+
+<div class="stat-item">
+  <span class="stat-ico"><i class="fas fa-image"></i></span>
+  <span class="stat-num">15</span>
+  <span class="stat-lbl">Indoor<br>Scenes</span>
+</div>
+
+<div class="stat-item">
+  <span class="stat-ico"><i class="fas fa-language"></i></span>
+  <span class="stat-num">&ge;5</span>
+  <span class="stat-lbl">Instruction<br>Variants</span>
+</div>
+
+<div class="stat-item">
+  <span class="stat-ico"><i class="fas fa-brain"></i></span>
+  <span class="stat-num">3</span>
+  <span class="stat-lbl">VLA Baselines<br>Evaluated</span>
+</div>
     </div>
-    <h2 class="sec-title" style="margin-top:2.5rem;"><i class="fas fa-th" style="margin-right:.4rem; font-size:.85em;"></i>Food Categories</h2>
-    <p class="sec-sub">Spanning <strong>three orders of magnitude</strong> in Young&rsquo;s modulus (7&thinsp;kPa &rarr; 1&thinsp;GPa), with material properties from food science literature.</p>
-    <div style="display:flex; flex-direction:column; gap:10px; align-items:center;">
-      <div class="chip-cloud">
-        <span style="font-size:.7rem; font-weight:700; letter-spacing:.08em; color:#10B981; text-transform:uppercase; align-self:center; margin-right:4px;">Easy</span>
-        <span class="chip"><span class="dot dot-easy"></span>Banana</span>
-        <span class="chip"><span class="dot dot-easy"></span>Strawberry</span>
-        <span class="chip"><span class="dot dot-easy"></span>Peach</span>
-        <span class="chip"><span class="dot dot-easy"></span>Pear</span>
-        <span class="chip"><span class="dot dot-easy"></span>Apple</span>
-      </div>
-      <div class="chip-cloud">
-        <span style="font-size:.7rem; font-weight:700; letter-spacing:.08em; color:#F59E0B; text-transform:uppercase; align-self:center; margin-right:4px;">Medium</span>
-        <span class="chip"><span class="dot dot-med"></span>Kiwi</span>
-        <span class="chip"><span class="dot dot-med"></span>Tomato</span>
-        <span class="chip"><span class="dot dot-med"></span>Mango</span>
-        <span class="chip"><span class="dot dot-med"></span>Orange</span>
-        <span class="chip"><span class="dot dot-med"></span>Avocado</span>
-      </div>
-      <div class="chip-cloud">
-        <span style="font-size:.7rem; font-weight:700; letter-spacing:.08em; color:#EF4444; text-transform:uppercase; align-self:center; margin-right:4px;">Hard</span>
-        <span class="chip"><span class="dot dot-hard"></span>Lemon</span>
-        <span class="chip"><span class="dot dot-hard"></span>Grape</span>
-        <span class="chip"><span class="dot dot-hard"></span>Persimmon</span>
-        <span class="chip"><span class="dot dot-hard"></span>Pineapple</span>
-        <span class="chip"><span class="dot dot-hard"></span>Watermelon</span>
-      </div>
-    </div>
-    <div style="display:flex; justify-content:center; gap:1.5rem; font-size:.78rem; color:#777; margin-top:.75rem; flex-wrap:wrap;">
-      <span><span class="dot dot-easy" style="margin-right:4px;"></span>Easy &nbsp;(E &lt; 3&thinsp;MPa)</span>
-      <span><span class="dot dot-med"  style="margin-right:4px;"></span>Medium</span>
-      <span><span class="dot dot-hard" style="margin-right:4px;"></span>Hard &nbsp;(E &gt; 10&thinsp;MPa)</span>
+    <h2 class="sec-title" style="margin-top:2.5rem;">
+      <i class="fas fa-th" style="margin-right:.4rem; font-size:.85em;"></i>Food Items
+    </h2>
+    <p class="sec-sub">
+      Fifteen food items with diverse geometric and material variations.
+    </p>
+    <div class="chip-cloud" style="max-width:760px; margin:0 auto;">
+      <span class="chip">Banana</span>
+      <span class="chip">Cucumber</span>
+      <span class="chip">Apple</span>
+      <span class="chip">Peach</span>
+      <span class="chip">Melon</span>
+      <span class="chip">Orange</span>
+      <span class="chip">Strawberry</span>
+      <span class="chip">Pear</span>
+      <span class="chip">Kiwi</span>
+      <span class="chip">Tomato</span>
+      <span class="chip">Lemon</span>
+      <span class="chip">Grape</span>
+      <span class="chip">Shine Muscat</span>
+      <span class="chip">Plum</span>
+      <span class="chip">Cherry</span>
     </div>
   </div>
 </div>
@@ -433,7 +456,18 @@
     <ul class="feat-list" style="margin-top:2rem;">
       <li><span class="feat-ico"><i class="fas fa-atom" style="color:#F59E0B;"></i></span><div><strong>Physics Engine &mdash; MLS-MPM.</strong> Moving Least Squares Material Point Method, a particle-based continuum solver that handles large deformations and topology changes. Material parameters (E, &nu;, &rho;, &sigma;<sub>y</sub>) are set per food type from literature and swept with &plusmn;10% Gaussian noise.</div></li>
       <li><span class="feat-ico"><i class="fas fa-robot" style="color:#10B981;"></i></span><div><strong>Robot Environment &mdash; ManiSkill.</strong> A 7-DoF arm with a knife EEF runs in the GPU-accelerated ManiSkill simulator. Multi-view RGB observations from randomized camera configurations.</div></li>
-      <li><span class="feat-ico"><i class="fas fa-database" style="color:#3273dc;"></i></span><div><strong>Data Collection.</strong> Expert demonstrations via human teleoperation and a motion planner, each annotated with &ge;5 paraphrased language instructions and synchronized EEF force logs. <strong>5,000+ base demos &mdash; 325K total trajectories.</strong></div></li>
+      <li>
+        <span class="feat-ico">
+          <i class="fas fa-database" style="color:#3273dc;"></i>
+        </span>
+        <div>
+          <strong>Data Collection.</strong>
+          Cutting trajectories are generated through teleoperation and an AABB-based
+          motion planner, then expanded with visual scene variation and language
+          augmentation. The final dataset contains <strong>21,000 cutting trajectories</strong>
+          and approximately <strong>1.57M total instances</strong>.
+        </div>
+      </li>
       <li><span class="feat-ico"><i class="fas fa-check-circle" style="color:#D63031;"></i></span><div><strong>Real-Robot Validation.</strong> Force curves from simulation are validated against a physical robot arm executing the same knife motion on real fruit, confirming physics-to-real consistency.</div></li>
     </ul>
   </div>
@@ -445,23 +479,54 @@
     <div class="sec-eyebrow"><i class="fas fa-chart-bar" style="margin-right:5px;"></i>Evaluation</div>
     <div class="sec-rule"></div>
     <h2 class="sec-title"><i class="fas fa-chart-bar" style="margin-right:.4rem;"></i>Results</h2>
-    <p class="sec-sub">All models fine-tuned on CulinaryCut demonstrations. Largest performance gap on <strong>Division-Based Multi-Cut</strong>. Full results in the paper.</p>
+    <p class="sec-sub">
+      All models are fine-tuned on CulinaryCut. Results reveal substantial geometry
+      gaps under object variation, multi-object, transfer-object, continuous-ratio,
+      and split-cut settings.
+    </p>
     <div class="results-wrap">
       <table class="cc-table">
         <thead>
           <tr>
             <th><i class="fas fa-microchip" style="margin-right:6px; opacity:.7;"></i>Model</th>
-            <th>Single Cut SR&thinsp;(%)</th><th>Multi-Cut SR&thinsp;(%)</th>
-            <th>Force MAE&thinsp;(N)</th><th>Cross-Object SR&thinsp;(%)</th>
+            <th>Object Variation</th>
+            <th>Multi-Object</th>
+            <th>Transfer Object</th>
+            <th>Continuous Cut</th>
+            <th>Split Cut</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td><i class="fas fa-robot" style="opacity:.35; margin-right:6px;"></i><strong>OpenVLA</strong></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-          <tr><td><i class="fas fa-robot" style="opacity:.35; margin-right:6px;"></i><strong>Octo</strong></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-          <tr><td><i class="fas fa-robot" style="opacity:.35; margin-right:6px;"></i><strong>RDT-1B</strong></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr>
+            <td><i class="fas fa-robot" style="opacity:.35; margin-right:6px;"></i><strong>RDT-1B</strong></td>
+            <td>49.67</td>
+            <td>31.42</td>
+            <td>42.85</td>
+            <td>51.25</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-robot" style="opacity:.35; margin-right:6px;"></i><strong>Octo</strong></td>
+            <td>32.10</td>
+            <td>17.00</td>
+            <td>34.00</td>
+            <td>6.75</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-robot" style="opacity:.35; margin-right:6px;"></i><strong>OpenVLA</strong></td>
+            <td>45.60</td>
+            <td>27.85</td>
+            <td>26.00</td>
+            <td>26.87</td>
+            <td>0</td>
+          </tr>
         </tbody>
       </table>
-      <p style="font-size:.8rem; color:#888; margin-top:.75rem;"><i class="fas fa-info-circle" style="margin-right:4px;"></i>SR = Success Rate. Numbers updated on camera-ready.</p>
+      <p style="font-size:.8rem; color:#888; margin-top:.75rem;">
+        <i class="fas fa-info-circle" style="margin-right:4px;"></i>
+        Success rates (%) averaged over cutting-task evaluations.
+      </p>
     </div>
   </div>
 </div>
@@ -475,8 +540,8 @@
     <div class="bib-box" style="margin-top:1.5rem;">
       <button class="copy-btn" onclick="copyBib(this)" aria-label="Copy BibTeX"><i class="fas fa-copy"></i>&thinsp;Copy</button>
       <pre><code id="bib-text">@inproceedings{koh2026culinarycut,
-  title     = {CulinaryCut: A Physics-Aware Benchmark for
-               Robotic Food Cutting in Deformable Simulation},
+  title     = {CulinaryCut: A Physics-Grounded Cutting Benchmark for
+               Vision-Language-Action Models},
   author    = {Koh, Hyunseo and Song, Chang-Yong and Choi, Youngjae
                and Viveiros, Misa and Hyde, David and Kim, Heewon},
   booktitle = {European Conference on Computer Vision (ECCV)},
