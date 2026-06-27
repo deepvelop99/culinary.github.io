@@ -71,12 +71,20 @@
 
   .chip-cloud { display:flex; flex-wrap:wrap; gap:7px; justify-content:center; }
   .chip { display:inline-flex; align-items:center; gap:6px; padding:5px 14px; border:1px solid #e0e0e0; border-radius:20px; font-size:.85rem; background:#fff; }
+  .chip-ico { font-size:1rem; line-height:1; }
 
   .task-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.25rem; max-width:820px; margin:0 auto; }
   .task-card { background:#fff; border:1px solid #ddd; border-top:3px solid #363636; border-radius:0 0 6px 6px; padding:1.75rem; }
   .task-tag { display:inline-block; background:#f0f0f0; color:#555; font-size:.65rem; font-weight:600; letter-spacing:.08em; padding:.2rem .55rem; border-radius:2px; margin-bottom:.65rem; }
   .task-card h3 { font-size:.975rem; font-weight:700; margin-bottom:.5rem; color:#363636; }
   .task-card p { font-size:.875rem; color:#555; line-height:1.75; margin:0; }
+
+
+.task-visual {
+  font-size:2.1rem;
+  line-height:1;
+  margin-bottom:.85rem;
+}
 
   .feat-list { list-style:none; padding:0; margin:0; }
   .feat-list li { display:flex; align-items:flex-start; gap:.75rem; margin-bottom:1rem; font-size:.975rem; color:#444; }
@@ -293,21 +301,21 @@
       Fifteen food items with diverse geometric and material variations.
     </p>
     <div class="chip-cloud" style="max-width:760px; margin:0 auto;">
-      <span class="chip">Banana</span>
-      <span class="chip">Cucumber</span>
-      <span class="chip">Apple</span>
-      <span class="chip">Peach</span>
-      <span class="chip">Melon</span>
-      <span class="chip">Orange</span>
-      <span class="chip">Strawberry</span>
-      <span class="chip">Pear</span>
-      <span class="chip">Kiwi</span>
-      <span class="chip">Tomato</span>
-      <span class="chip">Lemon</span>
-      <span class="chip">Grape</span>
-      <span class="chip">Shine Muscat</span>
-      <span class="chip">Plum</span>
-      <span class="chip">Cherry</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🍌</span>Banana</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🥒</span>Cucumber</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🍎</span>Apple</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🍑</span>Peach</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🍈</span>Melon</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🍊</span>Orange</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🍓</span>Strawberry</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🍐</span>Pear</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🥝</span>Kiwi</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🍅</span>Tomato</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🍋</span>Lemon</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🍇</span>Grape</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🟢</span>Shine Muscat</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🟣</span>Plum</span>
+      <span class="chip"><span class="chip-ico" aria-hidden="true">🍒</span>Cherry</span>
     </div>
   </div>
 </div>
@@ -321,14 +329,16 @@
     <p class="sec-sub">Two complementary task families expose distinct capability gaps in current VLA models.</p>
     <div class="task-grid">
       <div class="task-card">
+        <div class="task-visual" aria-hidden="true">🎯</div>
         <span class="task-tag"><i class="fas fa-crosshairs" style="margin-right:4px;"></i>Task Type 01</span>
-        <h3>Spatial-Based Cutting</h3>
-        <p>The robot interprets spatial language &mdash; <em>&ldquo;Cut from the left side,&rdquo; &ldquo;Slice at one-third from the top&rdquo;</em> &mdash; and executes a single downward knife pass at the grounded 3D position. Object pose is randomized to prevent positional overfitting.</p>
+        <h3>Spatial Grounding</h3>
+        <p>The robot interprets spatial language &mdash; <em>&ldquo;cut one-quarter from the right&rdquo;</em> or <em>&ldquo;cut the object in half&rdquo;</em> &mdash; and maps ratio- and direction-based instructions to precise cutting positions.</p>
       </div>
       <div class="task-card">
+        <div class="task-visual" aria-hidden="true">🔪</div>
         <span class="task-tag"><i class="fas fa-layer-group" style="margin-right:4px;"></i>Task Type 02</span>
-        <h3>Division-Based Multi-Cut</h3>
-        <p>The robot partitions food into N equal pieces through sequential passes. Each cut must account for prior deformation, requiring long-horizon geometric planning. All baselines show the largest performance drop here.</p>
+        <h3>Sequential Planning</h3>
+        <p>The robot divides an object into multiple equal pieces through sequential cuts. Each cut changes the object topology, requiring the next target position to be recomputed from the updated geometry.</p>
       </div>
     </div>
   </div>
