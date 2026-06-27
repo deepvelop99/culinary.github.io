@@ -124,13 +124,18 @@
   .soon-badge { font-size:.6rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; background:rgba(0,0,0,.18); color:inherit; padding:1px 6px; border-radius:2px; margin-left:5px; vertical-align:middle; }
   @media (max-width:600px) { .stats-grid { grid-template-columns:repeat(2,1fr) !important; gap:1.25rem 1.5rem !important; max-width:100% !important; } .inst-logos { gap:1.5rem !important; } }
 
-  /* Dataset video grid */
-  .video-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; max-width:960px; margin:2rem auto 0; }
-  .video-card { background:#fff; border:1px solid #e5e7eb; border-radius:8px; overflow:hidden; }
-  .video-card video { width:100%; display:block; aspect-ratio:1/1; object-fit:cover; background:#000; }
-  .video-card-label { text-align:center; font-size:.78rem; font-weight:600; color:#555; padding:.45rem .5rem .5rem; }
-  @media (max-width:900px) { .video-grid { grid-template-columns:repeat(3,1fr); } }
-  @media (max-width:560px) { .video-grid { grid-template-columns:repeat(2,1fr); } }
+  /* Dataset video slider */
+  .vid-slider-wrap { display:flex; align-items:center; gap:.75rem; margin-top:2rem; }
+  .vid-slider-viewport { overflow:hidden; flex:1; min-width:0; }
+  .vid-slider-track { display:flex; gap:1rem; transition:transform .35s cubic-bezier(.4,0,.2,1); will-change:transform; }
+  .vid-slide { flex:0 0 calc((100% - 3rem) / 4); min-width:0; background:#fff; border:1px solid #e5e7eb; border-radius:8px; overflow:hidden; }
+  .vid-slide video { width:100%; display:block; aspect-ratio:1/1; object-fit:cover; background:#000; }
+  .vid-slide-label { text-align:center; font-size:.78rem; font-weight:600; color:#555; padding:.45rem .5rem .5rem; }
+  .vid-arrow { flex-shrink:0; width:42px; height:42px; border-radius:50%; border:1.5px solid #d1d5db; background:#fff; color:#363636; font-size:1.35rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s,border-color .15s; }
+  .vid-arrow:hover:not(:disabled) { background:#f3f4f6; border-color:#9ca3af; }
+  .vid-arrow:disabled { opacity:.3; cursor:not-allowed; }
+  @media (max-width:900px) { .vid-slide { flex:0 0 calc((100% - 2rem) / 3); } }
+  @media (max-width:560px) { .vid-slide { flex:0 0 calc((100% - 1rem) / 2); } }
   @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition-duration:.01ms !important; } }
   </style>
 </head>
@@ -259,6 +264,31 @@
   </div>
 </div>
 
+<!-- CONTRIBUTIONS -->
+<div class="cc-section cc-section--surface">
+  <div style="max-width:860px; margin:0 auto;">
+    <h2 class="sec-title"><i class="fas fa-star" style="margin-right:.4rem;"></i>Contributions</h2>
+    <ul class="feat-list" style="margin-top:2rem;">
+      <li>
+        <span class="feat-ico"><i class="fas fa-atom" style="color:#F59E0B;"></i></span>
+        <div><strong>Physics-grounded cutting benchmark.</strong> We introduce a benchmark that integrates an MPM-based physics simulator with a robot simulator, providing a large-scale food-cutting dataset and evaluation protocol with force profiles, multi-view observations, continuous actions, and language instructions.</div>
+      </li>
+      <li>
+        <span class="feat-ico"><i class="fas fa-microscope" style="color:#3273dc;"></i></span>
+        <div><strong>Analysis and data-level mitigation of geometry and physics gaps.</strong> We identify a <em>geometry gap</em> in spatial instruction grounding and a <em>physics gap</em> in material-dependent cutting dynamics, and show that training on physics-grounded trajectories improves cutting success without modifying the policy architecture or providing force inputs at inference time.</div>
+      </li>
+      <li>
+        <span class="feat-ico"><i class="fas fa-cogs" style="color:#10B981;"></i></span>
+        <div><strong>Scalable data generation pipeline.</strong> We combine LLM-based language-instruction synthesis with simulation-driven trajectory augmentation to support large-scale dataset construction.</div>
+      </li>
+      <li>
+        <span class="feat-ico"><i class="fas fa-balance-scale" style="color:#D63031;"></i></span>
+        <div><strong>Physical plausibility assessment.</strong> We compare simulated contact-force curves against measurements from a real Franka robotic arm on a representative cutting task, confirming physics-to-real consistency.</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
 <!-- DATASET -->
 <div class="cc-section cc-section--surface">
   <div style="max-width:900px; margin:0 auto; text-align:center;">
@@ -332,23 +362,29 @@
 <div class="cc-section">
   <div style="max-width:960px; margin:0 auto; text-align:center;">
     <h2 class="sec-title"><i class="fas fa-film" style="margin-right:.4rem;"></i>Dataset Videos</h2>
-    <p class="sec-sub">ManiSkill co-simulation trajectories across all 15 food items. Each clip shows multi-view RGB observations collected during scripted cutting.</p>
-    <div class="video-grid">
-      <div class="video-card"><video src="./static/videos/banana.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍌 Banana</div></div>
-      <div class="video-card"><video src="./static/videos/apple.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍎 Apple</div></div>
-      <div class="video-card"><video src="./static/videos/orange.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍊 Orange</div></div>
-      <div class="video-card"><video src="./static/videos/melon.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍈 Melon</div></div>
-      <div class="video-card"><video src="./static/videos/peach.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍑 Peach</div></div>
-      <div class="video-card"><video src="./static/videos/cucumber.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🥒 Cucumber</div></div>
-      <div class="video-card"><video src="./static/videos/strawberry.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍓 Strawberry</div></div>
-      <div class="video-card"><video src="./static/videos/cherry.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍒 Cherry</div></div>
-      <div class="video-card"><video src="./static/videos/grape.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍇 Grape</div></div>
-      <div class="video-card"><video src="./static/videos/lemon.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍋 Lemon</div></div>
-      <div class="video-card"><video src="./static/videos/kiwi.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🥝 Kiwi</div></div>
-      <div class="video-card"><video src="./static/videos/plum.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🟣 Plum</div></div>
-      <div class="video-card"><video src="./static/videos/tomato.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍅 Tomato</div></div>
-      <div class="video-card"><video src="./static/videos/pear.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍐 Pear</div></div>
-      <div class="video-card"><video src="./static/videos/shine_muscat.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🟢 Shine Muscat</div></div>
+    <p class="sec-sub">ManiSkill co-simulation trajectories across all 15 food items. Each clip shows RGB observations collected during scripted cutting.</p>
+    <div class="vid-slider-wrap">
+      <button class="vid-arrow" id="vidPrev" onclick="vidSlide(-1)" aria-label="Previous" disabled>&#8249;</button>
+      <div class="vid-slider-viewport">
+        <div class="vid-slider-track" id="vidTrack">
+          <div class="vid-slide"><video src="./static/videos/banana.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🍌 Banana</div></div>
+          <div class="vid-slide"><video src="./static/videos/apple.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🍎 Apple</div></div>
+          <div class="vid-slide"><video src="./static/videos/orange.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🍊 Orange</div></div>
+          <div class="vid-slide"><video src="./static/videos/melon.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🍈 Melon</div></div>
+          <div class="vid-slide"><video src="./static/videos/peach.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🍑 Peach</div></div>
+          <div class="vid-slide"><video src="./static/videos/cucumber.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🥒 Cucumber</div></div>
+          <div class="vid-slide"><video src="./static/videos/strawberry.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🍓 Strawberry</div></div>
+          <div class="vid-slide"><video src="./static/videos/cherry.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🍒 Cherry</div></div>
+          <div class="vid-slide"><video src="./static/videos/grape.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🍇 Grape</div></div>
+          <div class="vid-slide"><video src="./static/videos/lemon.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🍋 Lemon</div></div>
+          <div class="vid-slide"><video src="./static/videos/kiwi.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🥝 Kiwi</div></div>
+          <div class="vid-slide"><video src="./static/videos/plum.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🟣 Plum</div></div>
+          <div class="vid-slide"><video src="./static/videos/tomato.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🍅 Tomato</div></div>
+          <div class="vid-slide"><video src="./static/videos/pear.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🍐 Pear</div></div>
+          <div class="vid-slide"><video src="./static/videos/shine_muscat.mp4" autoplay muted loop playsinline></video><div class="vid-slide-label">🟢 Shine Muscat</div></div>
+        </div>
+      </div>
+      <button class="vid-arrow" id="vidNext" onclick="vidSlide(1)" aria-label="Next">&#8250;</button>
     </div>
   </div>
 </div>
@@ -487,6 +523,29 @@
 </footer>
 
 <script>
+  var vidIdx = 0;
+  var VID_TOTAL = 15;
+  function getPerPage() {
+    var w = window.innerWidth;
+    return w > 900 ? 4 : w > 560 ? 3 : 2;
+  }
+  function vidSlide(dir) {
+    var perPage = getPerPage();
+    var maxIdx = VID_TOTAL - perPage;
+    vidIdx = Math.max(0, Math.min(vidIdx + dir, maxIdx));
+    var track = document.getElementById('vidTrack');
+    var slide = track.querySelector('.vid-slide');
+    var gap = 16;
+    var cardW = slide.offsetWidth + gap;
+    track.style.transform = 'translateX(-' + (vidIdx * cardW) + 'px)';
+    document.getElementById('vidPrev').disabled = vidIdx === 0;
+    document.getElementById('vidNext').disabled = vidIdx >= maxIdx;
+  }
+  window.addEventListener('resize', function() {
+    vidIdx = Math.max(0, Math.min(vidIdx, VID_TOTAL - getPerPage()));
+    vidSlide(0);
+  });
+
   function copyBib(btn) {
     navigator.clipboard.writeText(document.getElementById('bib-text').textContent).then(function() {
       btn.innerHTML = '<i class="fas fa-check"></i>&thinsp;Copied!';
