@@ -123,6 +123,14 @@
   .pub-btn--soon { opacity:.45; cursor:not-allowed; pointer-events:none; }
   .soon-badge { font-size:.6rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; background:rgba(0,0,0,.18); color:inherit; padding:1px 6px; border-radius:2px; margin-left:5px; vertical-align:middle; }
   @media (max-width:600px) { .stats-grid { grid-template-columns:repeat(2,1fr) !important; gap:1.25rem 1.5rem !important; max-width:100% !important; } .inst-logos { gap:1.5rem !important; } }
+
+  /* Dataset video grid */
+  .video-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; max-width:960px; margin:2rem auto 0; }
+  .video-card { background:#fff; border:1px solid #e5e7eb; border-radius:8px; overflow:hidden; }
+  .video-card video { width:100%; display:block; aspect-ratio:1/1; object-fit:cover; background:#000; }
+  .video-card-label { text-align:center; font-size:.78rem; font-weight:600; color:#555; padding:.45rem .5rem .5rem; }
+  @media (max-width:900px) { .video-grid { grid-template-columns:repeat(3,1fr); } }
+  @media (max-width:560px) { .video-grid { grid-template-columns:repeat(2,1fr); } }
   @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition-duration:.01ms !important; } }
   </style>
 </head>
@@ -316,6 +324,31 @@
       <span class="chip"><span class="chip-ico" aria-hidden="true">🟢</span>Shine Muscat</span>
       <span class="chip"><span class="chip-ico" aria-hidden="true">🟣</span>Plum</span>
       <span class="chip"><span class="chip-ico" aria-hidden="true">🍒</span>Cherry</span>
+    </div>
+  </div>
+</div>
+
+<!-- DATASET VIDEOS -->
+<div class="cc-section">
+  <div style="max-width:960px; margin:0 auto; text-align:center;">
+    <h2 class="sec-title"><i class="fas fa-film" style="margin-right:.4rem;"></i>Dataset Videos</h2>
+    <p class="sec-sub">ManiSkill co-simulation trajectories across all 15 food items. Each clip shows multi-view RGB observations collected during scripted cutting.</p>
+    <div class="video-grid">
+      <div class="video-card"><video src="./static/videos/banana.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍌 Banana</div></div>
+      <div class="video-card"><video src="./static/videos/apple.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍎 Apple</div></div>
+      <div class="video-card"><video src="./static/videos/orange.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍊 Orange</div></div>
+      <div class="video-card"><video src="./static/videos/melon.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍈 Melon</div></div>
+      <div class="video-card"><video src="./static/videos/peach.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍑 Peach</div></div>
+      <div class="video-card"><video src="./static/videos/cucumber.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🥒 Cucumber</div></div>
+      <div class="video-card"><video src="./static/videos/strawberry.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍓 Strawberry</div></div>
+      <div class="video-card"><video src="./static/videos/cherry.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍒 Cherry</div></div>
+      <div class="video-card"><video src="./static/videos/grape.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍇 Grape</div></div>
+      <div class="video-card"><video src="./static/videos/lemon.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍋 Lemon</div></div>
+      <div class="video-card"><video src="./static/videos/kiwi.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🥝 Kiwi</div></div>
+      <div class="video-card"><video src="./static/videos/plum.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🟣 Plum</div></div>
+      <div class="video-card"><video src="./static/videos/tomato.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍅 Tomato</div></div>
+      <div class="video-card"><video src="./static/videos/pear.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🍐 Pear</div></div>
+      <div class="video-card"><video src="./static/videos/shine_muscat.mp4" autoplay muted loop playsinline></video><div class="video-card-label">🟢 Shine Muscat</div></div>
     </div>
   </div>
 </div>
